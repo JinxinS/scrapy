@@ -1,5 +1,10 @@
-import scrapy
+# -*- coding: utf-8 -*-
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 
+import scrapy
+from webSpider.items import WebspiderItem
 class MSpider(scrapy.Spider):
     name = "mspider"
     allowed_domains = ["ygdy8.net"]
@@ -28,6 +33,7 @@ class MSpider(scrapy.Spider):
 	return 
 
     def parseMovie(self,response):
-	meta    = response.xpath('//p[br]/text()').extract()[0]
-	dl_link = response.xpath("//table/tbody/tr/td/a/@href").extract()[0]
-	return	
+	item = WebspiderItem()
+	item['name']  = response.xpath('//p[br]/text()').extract()[0].encode('utf-8')
+	item['link'] = response.xpath("//table/tbody/tr/td/a/@href").extract()[0].encode('utf-8')
+        return item	

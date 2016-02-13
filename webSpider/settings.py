@@ -8,12 +8,23 @@
 #     http://doc.scrapy.org/en/latest/topics/settings.html
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 BOT_NAME = 'webSpider'
 
 SPIDER_MODULES = ['webSpider.spiders']
 NEWSPIDER_MODULE = 'webSpider.spiders'
-
+DATABASE = {
+        'drivername': 'postgres',
+        'host': 'localhost',
+        'port': '5432',
+        'username': 'postgres',
+        'password': 'pass',
+        'database': 'movielib'
+        }
+ITEM_PIPELINES = {'webSpider.pipelines.WebspiderPipeline':300,}
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'webSpider (+http://www.yourdomain.com)'
