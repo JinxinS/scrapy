@@ -15,15 +15,15 @@ def db_connect():
     Performs database connection using database settings from settings.py.
     Returns sqlalchemy engine instance
     """
-    return create_engine(URL(**settings.DATABASE))
+    return create_engine(URL(**settings.DATABASE), client_encoding='utf8')
 
 def create_movie_table(engine):
     """"""
     DeclarativeBase.metadata.create_all(engine)
 
 class Movie(DeclarativeBase):
-        __tablename__="Library"
-        id = Column(Integer, primary_key=True)
-        name =Column('name',String)
+        __tablename__="movielib"
+        id = Column(Integer)
+        name =Column('name',String, primary_key=True)
         link = Column('link', String, nullable=True)
 

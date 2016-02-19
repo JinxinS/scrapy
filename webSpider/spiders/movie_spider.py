@@ -20,7 +20,7 @@ class MSpider(scrapy.Spider):
 #        for t in titles:
 #	    print t.encode('utf-8')
 
-        for i in range(0,1):
+        for i in range(0,2):
             url = "".join([MSpider.base_url,urls[i]])
 #            print "parsing page:",i,":",url,"priority=",pages-i
             yield scrapy.Request(url,callback=self.parsePage,priority=pages-i)
@@ -35,5 +35,5 @@ class MSpider(scrapy.Spider):
     def parseMovie(self,response):
 	item = WebspiderItem()
 	item['name']  = response.xpath('//p[br]/text()').extract()[0].encode('utf-8')
-	item['link'] = response.xpath("//table/tbody/tr/td/a/@href").extract()[0].encode('utf-8')
+	item['link'] =  response.xpath("//table/tbody/tr/td/a/@href").extract()[0].encode('utf-8')
         return item	

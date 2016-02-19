@@ -22,7 +22,7 @@ class WebspiderPipeline(object):
         movie = Movie(**item)
 #        print movie.name,movie.link
         try:
-            session.add(movie)
+            session.merge(movie)
             session.commit()
         except:
             session.rollback()
